@@ -1,6 +1,16 @@
 const readline = require('readline');
 
-// Create readline interface for input/output
+const texts = [
+  "The quick brown fox jumps over the lazy dog.",
+  "Many small steps can conquer the highest mountain.",
+  "A journey of a thousand miles must begin with a single step.",
+  "Not all those who wander are lost."
+];
+
+function getRandomText() {
+  return texts[Math.floor(Math.random() * texts.length)];
+}
+
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -13,24 +23,11 @@ setTimeout(() => {
   setTimeout(() => {
     rl.write("GO!\n");
 
-    // Start time
     const startTime = process.hrtime();
+    const text = getRandomText();
 
-    const text = "Lorem ipsum dolor sit amet, consectetur adipiscing " +
-                 "elit, sed do eiusmod tempor incididunt ut labore et " +
-                 "dolore magna aliqua. Ut enim ad minim veniam, quis " +
-                 "nostrud exercitation ullamco laboris nisi ut aliquip " +
-                 "ex ea commodo consequat. Duis aute irure dolor in " +
-                 "reprehenderit in voluptate velit esse cillum dolore eu " +
-                 "fugiat nulla pariatur. Excepteur sint occaecat cupidatat " +
-                 "non proident, sunt in culpa qui officia deserunt " +
-                 "mollit anim id est laborum.";
-
-    // Prompt for user input
-    rl.question(text, (userInput) => {
+    rl.question(text + "\n", (userInput) => {
       const endTime = process.hrtime(startTime);
-
-      // Calculate total time in seconds
       const totalTimeInSeconds = (endTime[0] + endTime[1] / 1e9);
 
       const totalWords = text.split(/\s+/);
